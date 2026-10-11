@@ -1,0 +1,303 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  /* Dynamic Browser Color Scheme */
+  html {
+    color-scheme: light;
+  }
+  html.dark,
+  .dark {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-900 transition-colors duration-200 antialiased min-h-screen;
+    font-family: var(--font-sans);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+
+  html.dark body,
+  .dark body {
+    @apply bg-slate-950 text-slate-100;
+  }
+
+  /* Form controls & inputs theme updates */
+  input, select, textarea {
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+  html.dark input,
+  html.dark select,
+  html.dark textarea,
+  .dark input,
+  .dark select,
+  .dark textarea {
+    color-scheme: dark;
+  }
+
+  /* Text placeholder in dark mode */
+  .dark ::placeholder {
+    color: rgb(148 163 184 / 0.7);
+  }
+
+  /* Neo-Brutalism Global Overrides */
+  html.neo-brutalism body {
+    @apply bg-[#FFF4E0] text-black font-mono transition-none;
+    font-family: var(--font-display);
+  }
+  html.neo-brutalism.dark body {
+    @apply bg-[#111111] text-[#E0E0E0];
+  }
+
+  html.neo-brutalism * {
+    @apply transition-none;
+  }
+
+  html.neo-brutalism .shadow-sm,
+  html.neo-brutalism .shadow,
+  html.neo-brutalism .shadow-md,
+  html.neo-brutalism .shadow-lg,
+  html.neo-brutalism .shadow-xl,
+  html.neo-brutalism .shadow-2xs {
+    box-shadow: 4px 4px 0px 0px #000 !important;
+  }
+  html.neo-brutalism.dark .shadow-sm,
+  html.neo-brutalism.dark .shadow,
+  html.neo-brutalism.dark .shadow-md,
+  html.neo-brutalism.dark .shadow-lg,
+  html.neo-brutalism.dark .shadow-xl,
+  html.neo-brutalism.dark .shadow-2xs {
+    box-shadow: 4px 4px 0px 0px #FFD700 !important;
+  }
+
+  html.neo-brutalism .rounded-xl,
+  html.neo-brutalism .rounded-2xl,
+  html.neo-brutalism .rounded-3xl,
+  html.neo-brutalism .rounded-lg,
+  html.neo-brutalism .rounded-md {
+    border-radius: 0 !important;
+  }
+
+  /* Preserve rounded pill shapes for switches and avatars in Neo-Brutalism */
+  html.neo-brutalism [role="switch"],
+  html.neo-brutalism [role="switch"] *,
+  html.neo-brutalism img.rounded-full {
+    border-radius: 9999px !important;
+  }
+
+  html.neo-brutalism .border {
+    border-width: 3px !important;
+    border-color: #000 !important;
+  }
+  html.neo-brutalism.dark .border {
+    border-color: #FFD700 !important;
+  }
+
+  /* Neo-Brutalism Dark Mode Surface Colors */
+  html.neo-brutalism.dark .bg-white {
+    background-color: #18181b !important;
+    color: #f4f4f5 !important;
+  }
+  html.neo-brutalism.dark .bg-slate-50,
+  html.neo-brutalism.dark .bg-slate-100,
+  html.neo-brutalism.dark .bg-slate-200 {
+    background-color: #27272a !important;
+    color: #f4f4f5 !important;
+  }
+  html.neo-brutalism.dark .text-slate-900,
+  html.neo-brutalism.dark .text-slate-800,
+  html.neo-brutalism.dark .text-black {
+    color: #f4f4f5 !important;
+  }
+  html.neo-brutalism.dark .text-slate-600,
+  html.neo-brutalism.dark .text-slate-500 {
+    color: #a1a1aa !important;
+  }
+
+  /* Neo-Brutalism specific color overrides for common elements */
+  html.neo-brutalism .bg-emerald-600 {
+    @apply bg-[#4ADE80] text-black;
+  }
+  html.neo-brutalism .bg-rose-600 {
+    @apply bg-[#F87171] text-black;
+  }
+  html.neo-brutalism .bg-amber-600 {
+    @apply bg-[#FBBF24] text-black;
+  }
+  html.neo-brutalism .bg-blue-600 {
+    @apply bg-[#60A5FA] text-black;
+  }
+  html.neo-brutalism .text-emerald-600 {
+    @apply text-[#166534];
+  }
+  html.neo-brutalism.dark .text-emerald-600,
+  html.neo-brutalism.dark .text-emerald-400 {
+    @apply text-[#4ADE80];
+  }
+}
+
+/* Component Theme Enhancements */
+@layer components {
+  /* Table styling across themes */
+  .dark table th {
+    border-color: rgb(30 41 59 / 0.8);
+    color: rgb(148 163 184);
+  }
+  .dark table td {
+    border-color: rgb(30 41 59 / 0.6);
+    color: rgb(226 232 240);
+  }
+  .dark table tbody tr:hover {
+    background-color: rgb(30 41 59 / 0.35);
+  }
+
+  /* Smooth Theme Transitions on Interactive Elements */
+  header,
+  nav,
+  aside,
+  main,
+  button:not(.no-theme-transition) {
+    transition-property: background-color, border-color, color, box-shadow;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 200ms;
+  }
+}
+
+/* Smooth Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.4);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.6);
+}
+.dark ::-webkit-scrollbar-thumb,
+html.dark ::-webkit-scrollbar-thumb {
+  background: rgba(71, 85, 105, 0.5);
+}
+.dark ::-webkit-scrollbar-thumb:hover,
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.7);
+}
+
+/* Text Selection across themes */
+::selection {
+  background-color: rgba(16, 185, 129, 0.25);
+  color: inherit;
+}
+.dark ::selection,
+html.dark ::selection {
+  background-color: rgba(16, 185, 129, 0.4);
+  color: #ffffff;
+}
+
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-transition {
+  animation: fadeInSlide 0.15s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* High Contrast Mode Overrides */
+html.high-contrast {
+  --hc-bg: #ffffff;
+  --hc-text: #000000;
+  --hc-border: #000000;
+  --hc-accent: #ffff00;
+  --hc-primary: #0000ff;
+  --hc-danger: #ff0000;
+}
+
+html.high-contrast.dark {
+  --hc-bg: #000000;
+  --hc-text: #ffffff;
+  --hc-border: #ffffff;
+  --hc-accent: #ffff00;
+  --hc-primary: #5555ff;
+  --hc-danger: #ff5555;
+}
+
+html.high-contrast body {
+  background-color: var(--hc-bg) !important;
+  color: var(--hc-text) !important;
+}
+
+html.high-contrast * {
+  border-color: var(--hc-border) !important;
+}
+
+html.high-contrast .bg-white, 
+html.high-contrast .dark\:bg-slate-900,
+html.high-contrast .bg-slate-50,
+html.high-contrast .dark\:bg-slate-800 {
+  background-color: var(--hc-bg) !important;
+}
+
+html.high-contrast .text-slate-900,
+html.high-contrast .dark\:text-white,
+html.high-contrast .text-slate-500,
+html.high-contrast .dark\:text-slate-400,
+html.high-contrast .text-slate-600,
+html.high-contrast .text-slate-700,
+html.high-contrast .text-slate-800 {
+  color: var(--hc-text) !important;
+}
+
+html.high-contrast .bg-emerald-600,
+html.high-contrast .hover\:bg-emerald-700 {
+  background-color: var(--hc-primary) !important;
+  color: #ffffff !important;
+}
+
+html.high-contrast .bg-rose-600,
+html.high-contrast .hover\:bg-rose-700,
+html.high-contrast .bg-rose-500 {
+  background-color: var(--hc-danger) !important;
+  color: #ffffff !important;
+}
+
+html.high-contrast .text-emerald-600,
+html.high-contrast .dark\:text-emerald-400,
+html.high-contrast .text-emerald-500 {
+  color: var(--hc-primary) !important;
+}
+
+html.high-contrast .text-rose-600,
+html.high-contrast .dark\:text-rose-400,
+html.high-contrast .text-rose-500 {
+  color: var(--hc-danger) !important;
+}
+
+html.high-contrast .border {
+  border: 2px solid var(--hc-border) !important;
+}
+
+html.high-contrast .shadow-sm,
+html.high-contrast .shadow-md,
+html.high-contrast .shadow-lg {
+  box-shadow: none !important;
+}

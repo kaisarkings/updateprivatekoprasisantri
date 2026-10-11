@@ -1,0 +1,44 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Koperasi Santri Cloud Firestore Security Rules
+    
+    match /students/{studentId} {
+      allow read, write: if true;
+    }
+
+    match /transactions/{transactionId} {
+      allow read, write: if true;
+    }
+
+    match /topups/{topupId} {
+      allow read, write: if true;
+    }
+
+    match /settings/{settingId} {
+      allow read, write: if true;
+    }
+
+    match /categories/{categoryId} {
+      allow read, write: if true;
+    }
+
+    match /admin_users/{userId} {
+      allow read, write: if true;
+    }
+
+    match /activity_logs/{logId} {
+      allow read, write: if true;
+    }
+
+    match /daily_summaries/{summaryId} {
+      allow read, write: if true;
+    }
+
+    // Default deny unknown collections
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
+
